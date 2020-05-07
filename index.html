@@ -4,68 +4,31 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.2/css/bulma.css">
     <style type="text/css">
-        .is-completed {
-            color: green;
+        body{
+            padding-top: 20px;
+        }
+
+        .container{
+            margin-bottom: 35px;
         }
     </style>
 </head>
+
 <body>
+<div id="root" class="container">
 
-<div id="root">
-    <h1>All tasks</h1>
-    <ul>
-        <li v-for="task in tasks" :class="{'is-completed' : task.completed}" v-text="task.description"></li>
-    </ul>
-
-    <h1>Incomplete</h1>
-    <ul>
-        <li v-for="task in incompleteTasks">
-            {{task.description}}
-            <button @click="changeStatus(task)">Complete</button>
-        </li>
-    </ul>
-
-    <h1>Completed</h1>
-    <ul>
-        <li v-for="task in completeTasks">
-            {{task.description}}
-            <button @click="changeStatus(task)">Clear</button>
-        </li>
-    </ul>
+    <message header="Hmmm" body="body"></message>
+    <message header="Hmmm" body="Mehhhh"></message>
 
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="main.js"></script>
 
 <script>
 
-    new Vue({
-        el: '#root',
-        data: {
-            tasks: [
-                {description: 'Eat', completed: true},
-                {description: 'Sleep', completed: false},
-                {description: 'Watch Gumball', completed: false}
-
-            ]
-        },
-
-        methods: {
-            changeStatus(task) {
-                task.completed ? task.completed = false : task.completed = true;
-            },
-        },
-
-        computed: {
-            incompleteTasks() {
-                return this.tasks.filter(task => !task.completed);
-            },
-            completeTasks() {
-                return this.tasks.filter(task => task.completed);
-            }
-        }
-    })
 </script>
 
 </body>
