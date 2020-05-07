@@ -1,4 +1,4 @@
-Vue.component('message', {
+Vue.component('modal', {
     props: [
         'header', 'body'
     ],
@@ -8,15 +8,15 @@ Vue.component('message', {
         };
     },
     template:
-        `<article class="message" v-show="isVisible">
-            <div class="message-header">
-                <p>{{header}}</p>
-                <button class="delete" aria-label="delete" @click="isVisible = false"></button>
+        `<div class="modal is-active">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            <div class="box">
+                <slot></slot>
             </div>
-            <div class="message-body">
-                {{body}}
-            </div>
-        </article>`,
+        </div>
+        <button class="modal-close is-large" aria-label="close" @click="$emit('close')"></button>
+    </div>`,
     methods: {
         hideModal() {
             this.isVisible = false;
@@ -24,23 +24,9 @@ Vue.component('message', {
     }
 });
 
-Vue.component('task-list', {
-    template: `<div><task v-for="task in tasks">{{task.description}}</task></div>`,
-    data() {
-        return {
-            tasks: [
-                {description: 'Eat', completed: true},
-                {description: 'Sleep', completed: false},
-                {description: 'Watch Gumball', completed: false}
-            ]
-        }
-    }
-});
-
-Vue.component('task', {
-    template: '<li><slot></slot></li>'
-});
-
 new Vue({
-    el: '#root'
+    el: '#root',
+    data:{
+        visibleModal: false
+    }
 });

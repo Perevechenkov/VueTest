@@ -6,11 +6,11 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.2/css/bulma.css">
     <style type="text/css">
-        body{
+        body {
             padding-top: 20px;
         }
 
-        .container{
+        .container {
             margin-bottom: 35px;
         }
     </style>
@@ -19,8 +19,10 @@
 <body>
 <div id="root" class="container">
 
-    <message header="Hmmm" body="body"></message>
-    <message header="Hmmm" body="Mehhhh"></message>
+    <modal v-if="visibleModal" @close="visibleModal=false">
+        <p>Hmmmmmmm Hmmmmmmm Hmmmmmmm Hmmmmmmm Hmmmmmmm Hmmmmmmm Hmmmmmmm Hmmmmmmm </p>
+    </modal>
+    <button @click="visibleModal=true">Show</button>
 
 </div>
 
