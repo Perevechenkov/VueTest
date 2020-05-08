@@ -16,8 +16,10 @@
 <body>
 <div id="root" class="container">
 
-    <coupon></coupon>
-    <h1 v-show="couponApplied">Hmmmmmm</h1>
+    <modal v-if="isVisible" @close="hide">
+        <template slot="header">Header</template>
+        <template slot="body">Custom body</template>
+    </modal>
 
 </div>
 

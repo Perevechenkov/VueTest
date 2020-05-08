@@ -1,35 +1,38 @@
-window.EventDispatcher = new class {
-    constructor() {
-        this.vue = new Vue();
-    }
+Vue.component('modal', {
+    template: ` 
+ <div class="modal is-active">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">
+        <slot name="header"></slot>
+      </p>
+      <button class="delete" aria-label="close" @click="$emit('close')"></button>
+    </header>
+    <section class="modal-card-body">
+      <slot name="body">
+      Default body
+      </slot>
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button is-success">Save changes</button>
+      <button class="button" @click="$emit('close')">Cancel</button>
+    </footer>
+  </div>
+</div>`,
 
-    fire(event, data = null) {
-        this.vue.$emit(event, data);
-    }
-
-    listen(event, callback) {
-        this.vue.$on(event, callback);
-    }
-};
-
-Vue.component('coupon', {
-    template: ` <input @blur="onCouponApplied">`,
-
-    methods: {
-        onCouponApplied() {
-            EventDispatcher.fire('applied')
-        }
-    },
 
 })
 
 
 new Vue({
     el: '#root',
-    data: {
-        couponApplied: false
+    data:{
+        isVisible: true
     },
-    created() {
-        EventDispatcher.listen('applied', ()=> this.couponApplied=true)
+    methods:{
+        hide(){
+            this.isVisible=false
+        }
     }
 });
