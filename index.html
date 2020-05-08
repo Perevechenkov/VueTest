@@ -16,17 +16,8 @@
 <body>
 <div id="root" class="container">
 
-    <tabs>
-        <tab name="first" :selected="true">
-            <h1>First</h1>
-        </tab>
-        <tab name="second" >
-            <h1>Second</h1>
-        </tab>
-        <tab name="third">
-            <h1>Third</h1>
-        </tab>
-    </tabs>
+    <coupon @applied="onCouponApplied"></coupon>
+    <h1 v-if="couponApplied">Hmmmmmm</h1>
 
 </div>
 
