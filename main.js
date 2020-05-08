@@ -1,9 +1,23 @@
+window.EventDispatcher = new class {
+    constructor() {
+        this.vue = new Vue();
+    }
+
+    fire(event, data = null) {
+        this.vue.$emit(event, data);
+    }
+
+    listen(event, callback) {
+        this.vue.$on(event, callback);
+    }
+};
+
 Vue.component('coupon', {
     template: ` <input @blur="onCouponApplied">`,
 
     methods: {
         onCouponApplied() {
-            this.$emit('applied')
+            EventDispatcher.fire('applied')
         }
     },
 
@@ -15,9 +29,7 @@ new Vue({
     data: {
         couponApplied: false
     },
-    methods: {
-        onCouponApplied() {
-            this.couponApplied = true
-        }
+    created() {
+        EventDispatcher.listen('applied', ()=> this.couponApplied=true)
     }
 });
